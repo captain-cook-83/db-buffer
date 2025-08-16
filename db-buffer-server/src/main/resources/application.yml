@@ -1,0 +1,56 @@
+spring:
+  application:
+    name: dbbuffer
+  profiles:
+    active: dev
+  devtools:
+    livereload:
+      enabled: false
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://192.168.1.202:3306/karma_game_202_empty?serverTimezone=UTC&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true&rewriteBatchedStatements=true
+    username: root
+    password: admin123
+    druid:
+      initial-size: 50
+      max-active: 200
+      max-wait: 30000
+      min-idle: 50
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 1 FROM DUAL
+      filters: stat,slf4j,wall
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+      use-global-data-source-stat: true
+      connectionInitSqls: set names utf8mb4
+
+processor:
+  schema-path: schemas
+  init:
+    frame-interval-ms: 10000        # 10s
+    frame-capacity: 100             # TODO 3000+
+    frame-init-records: 256         # init records per collection
+    sorting-array-capacity: 8
+    warmup-duration: 60000          # must be longer than system startup duration and frame-interval-ms
+  persist:
+    batch-write-size: 30            # TODO 100+
+
+acceptor:
+  max-acceptors: 5
+  kafka:
+    bootstrap-servers: 127.0.0.1:9092
+    topic: db_buffer_0521
+    group-id: db_buffer_acceptor
+    session-time-ms: 10000
+    heartbeat-interval-ms: 3000      # typically should be set no higher than 1/3 of session-time-ms
+    max-poll-interval-ms: 30000
+    max-poll-records: 30
+
+logging:
+  level:
+    com.karma.dbbuffer: DEBUG
+    org.apache.kafka: INFO
+    java.sql: DEBUG

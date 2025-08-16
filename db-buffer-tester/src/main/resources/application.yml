@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: dbbuffer-tester
+  profiles:
+    active: dev
+  devtools:
+    livereload:
+      enabled: false
+
+db-buffer:
+  schema-path: ../schemas
+  kafka:
+    bootstrap-servers: 127.0.0.1:9092
+    topic: db_buffer_0521
+    acks: 1                   # 0、1、all
+    retry-times: 3
+    retry-backoff-ms: 1000
+    buffer-memory: 33554432   # 32M
+    batch-size: 32768         # 32K
+    linger-ms: 100
+    max-block-ms: 1000
+
+logging:
+  level:
+    com.karma.dbbuffer: DEBUG
+    org.apache.kafka: INFO

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>db-buffer-parent</artifactId>
+        <groupId>com.karma</groupId>
+        <version>0.0.1</version>
+    </parent>
+    <name>db-buffer-client</name>
+    <artifactId>db-buffer-client</artifactId>
+    <version>0.0.1</version>
+
+    <properties>
+        <commons-version>0.0.1</commons-version>
+        <auto-service-version>1.0</auto-service-version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.karma</groupId>
+            <artifactId>db-buffer-commons</artifactId>
+            <version>${commons-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.auto.service</groupId>
+            <artifactId>auto-service</artifactId>
+            <version>${auto-service-version}</version>
+        </dependency>
+    </dependencies>
+
+</project>
